@@ -88,6 +88,8 @@
     <Compile Include="MasterSlaves\Interception\MasterSlaveInterception.cs" />
     <Compile Include="MasterSlaves\Interception\MasterSlaveInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\DbConnectionStringEqualityComparer.cs" />
+    <Compile Include="Utilities\DbConnectionStringTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
