@@ -48,7 +48,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,11 +59,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interception\NullDbConnectionInterceptor.cs" />
+    <Compile Include="MasterSlaves\AppConfig.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\ApplyItemCollection.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\ApplyItemElement.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\ConnectionStringElement.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\EFMasterSlaveSection.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\MasterConnectionStringElement.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\SlaveConnectionStringCollection.cs" />
+    <Compile Include="MasterSlaves\ConfigFile\SlaveConnectionStringElement.cs" />
+    <Compile Include="MasterSlaves\DbMasterServer.cs" />
+    <Compile Include="MasterSlaves\DbMasterSlaveCommandInterceptor.cs" />
+    <Compile Include="MasterSlaves\DbMasterSlaveConfig.cs" />
+    <Compile Include="MasterSlaves\DbMasterSlaveConfigContext.cs" />
+    <Compile Include="MasterSlaves\DbMasterSlaveConnectionInterceptor.cs" />
+    <Compile Include="MasterSlaves\DbServer.cs" />
+    <Compile Include="MasterSlaves\DbServerState.cs" />
+    <Compile Include="MasterSlaves\DbServerStateScanEventArgs.cs" />
+    <Compile Include="MasterSlaves\DbServerStateScanEventHandler.cs" />
+    <Compile Include="MasterSlaves\DbServerStateScanner.cs" />
+    <Compile Include="MasterSlaves\DbServerType.cs" />
+    <Compile Include="MasterSlaves\DbSlaveServer.cs" />
+    <Compile Include="MasterSlaves\DbSlaveServerCollection.cs" />
+    <Compile Include="MasterSlaves\Disposable.cs" />
+    <Compile Include="MasterSlaves\EFMasterSlaveConfig.cs" />
+    <Compile Include="MasterSlaves\Interception\IMasterSlaveInterceptor.cs" />
+    <Compile Include="MasterSlaves\Interception\MasterSlaveDispatcher.cs" />
+    <Compile Include="MasterSlaves\Interception\MasterSlaveInterception.cs" />
+    <Compile Include="MasterSlaves\Interception\MasterSlaveInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EntityPlugin.RWSplitting.Core\EntityPlugin.RWSplitting.Core.csproj">
+      <Project>{108d5e91-7794-4c3c-9b05-0949ee09f41d}</Project>
+      <Name>EntityPlugin.RWSplitting.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
