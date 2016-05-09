@@ -28,7 +28,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// </summary>
 		protected virtual IContainer Container
 		{
-			get { return this._container.Value; }
+			get { return _container.Value; }
 		}
 
 		/// <summary>
@@ -36,9 +36,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// </summary>
 		public void Dispose()
 		{
-			this.Dispose(true);
-
-			// 防止该对象被两次或多次执行 Dispose 方法。
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
@@ -47,18 +45,18 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// </summary>
 		protected void Dispose(bool disposing)
 		{
-			if (!this._disposed)
+			if (!_disposed)
 			{
-				lock (this._locker)
+				lock (_locker)
 				{
 					this.OnDisposing();
 					if (disposing)
 					{
-						this._container.Value.Dispose();
-						this._container = null;
+						_container.Value.Dispose();
+						_container = null;
 					}
-					this._disposed = true;
-					this.OnDisposed();
+					_disposed = true;
+					OnDisposed();
 				}
 			}
 		}
@@ -68,10 +66,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// </summary>
 		protected void OnDisposing()
 		{
-			if (this.Disposing != null)
-			{
-				this.Disposing(this, EventArgs.Empty);
-			}
+			Disposing?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -79,10 +74,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// </summary>
 		protected void OnDisposed()
 		{
-			if (this.Disposed != null)
-			{
-				this.Disposed(this, EventArgs.Empty);
-			}
+			Disposed?.Invoke(this, EventArgs.Empty);
 		}
 
 		/// <summary>

@@ -291,7 +291,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 				throw new ArgumentNullException(nameof(slaves));
 
 			SlaveConnectionStringElement[] elements = slaves.OfType<SlaveConnectionStringElement>().OrderBy(item => item.Order).ToArray();
-			if (elements != null)
+			if (elements == null)
 				throw new ArgumentNullException(nameof(elements));
 
 			this._slaves = new DbSlaveServerCollection();
