@@ -84,6 +84,7 @@
     <Compile Include="Utilities\DbConnectionStringTester.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EntityPlugin.RWSplitting.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
