@@ -42,6 +42,5 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		{
 			get { return _dispatcher.Value; }
 		}
-
 	}
 }

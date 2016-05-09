@@ -23,8 +23,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		private Type _targetContextType;
 		private readonly object _locker = new object();
 
-
-
 		/// <summary>
 		/// 初始化类型 <see cref="ApplyItemElement"/> 的新实例。
 		/// </summary>
@@ -35,7 +33,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 以指定的 EF 实体数据库上下文类型完整名称初始化类型 <see cref="ApplyItemElement"/> 的新实例。
 		/// </summary>
-		/// <param name="targetContextFullName"></param>
 		public ApplyItemElement(string targetContextFullName)
 			: this()
 		{
@@ -55,13 +52,8 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 以指定的 EF 实体数据库上下文类型初始化类型 <see cref="ApplyItemElement"/> 的新实例。
 		/// </summary>
-		/// <param name="targetContextType"></param>
 		public ApplyItemElement(Type targetContextType)
-			: this(targetContextType.FullName)
-		{
-		}
-
-
+			: this(targetContextType.FullName) { }
 
 		/// <summary>
 		/// 获取或设置该 <see cref="ApplyItemElement"/> 对象所表示的目标 EF 实体数据库上下文类型的（完整）名称。
@@ -72,8 +64,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			get { return (string)base[_TargetContext_Key]; }
 			set { base[_TargetContext_Key] = value; }
 		}
-
-
 
 		/// <summary>
 		/// 读取或设置 <see cref="ApplyItemElement"/> 配置节中表示 EF 读写分离服务配置文件信息中的 增删改（写入）操作 数据库服务连接参数配置信息。
@@ -93,8 +83,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		{
 			get { return base[_SlaveConnectionStrings_Key] as SlaveConnectionStringCollection; }
 		}
-
-
 
 		/// <summary>
 		/// 获取或设置一个布尔值属性，表示 EF 读写分离服务配置环境中是否允许当 Master 服务器离线后自动将 Slave 服务器节点作为 Master 服务器使用。
@@ -134,7 +122,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			set { this[_SlaveRandomization_Key] = value; }
 		}
 
-
 		/// <summary>
 		/// 获取或设置一个 int 数值属性，表示当 EF 读写分离服务配置环境中定义了多个数据库服务器节点时，系统轮询扫描检测每个服务器节点可用状态的时间间隔。
 		/// <para>该属性值单位为 秒。</para>
@@ -159,8 +146,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			get { return (bool)this[_ServerStateScanWithNonOffline_Key]; }
 			set { this[_ServerStateScanWithNonOffline_Key] = value; }
 		}
-
-
 
 		/// <summary>
 		/// 获取该 <see cref="ApplyItemElement"/> 对象所表示的目标 EF 实体数据库上下文类型。
@@ -209,13 +194,9 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			}
 		}
 
-
-
 		/// <summary>
 		/// 确定当前对象的 <see cref="TargetContextType"/> 所示类型能否应用于指定的 EF 实体数据库上下文对象。
 		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
 		public virtual bool CanApplyTo(System.Data.Entity.DbContext context)
 		{
 			if (context == null)
@@ -227,8 +208,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 确定当前对象的 <see cref="TargetContextType"/> 所示类型能否应用于指定的 EF 实体数据库上下文。
 		/// </summary>
-		/// <param name="contextType"></param>
-		/// <returns></returns>
 		public virtual bool CanApplyTo(Type contextType)
 		{
 			Type targetContextType = this.TargetContextType;
@@ -239,20 +218,15 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 确定当前对象的 <see cref="TargetContextType"/> 所示类型能否应用于指定的 EF 实体数据库上下文。
 		/// </summary>
-		/// <param name="contextTypeFullName"></param>
-		/// <returns></returns>
 		public virtual bool CanApplyTo(string contextTypeFullName)
 		{
 			Type contextType = Type.GetType(contextTypeFullName);
 			return this.CanApplyTo(contextType);
 		}
 
-
 		/// <summary>
 		/// 确认 <paramref name="targetContextFullName"/> 参数所示的 <see cref="Type"/> 对象是否等效或继承于类型 <see cref="System.Data.Entity.DbContext"/>。
 		/// </summary>
-		/// <param name="targetContextFullName"></param>
-		/// <returns></returns>
 		private bool ValidateTargetContextType(string targetContextFullName)
 		{
 			if (string.IsNullOrEmpty(targetContextFullName))
@@ -266,8 +240,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 确认 <paramref name="targetContextType"/> 参数所示的 <see cref="Type"/> 对象是否等效或继承于类型 <see cref="System.Data.Entity.DbContext"/>。
 		/// </summary>
-		/// <param name="targetContextType"></param>
-		/// <returns></returns>
 		private bool ValidateTargetContextType(Type targetContextType)
 		{
 			if (targetContextType == null)

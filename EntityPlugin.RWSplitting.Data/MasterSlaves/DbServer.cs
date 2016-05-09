@@ -10,7 +10,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 以指定的数据库连接字符串值作为 <see cref="ConnectionString"/> 属性值初始化类型 <see cref="DbServer"/> 的新实例。
 		/// </summary>
-		/// <param name="connectionString"></param>
 		public DbServer(string connectionString)
 		{
 			if (string.IsNullOrEmpty(connectionString))

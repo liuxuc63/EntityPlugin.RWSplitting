@@ -16,7 +16,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 以指定的 EF 数据库主从读写分离配置上下文对象作为 <see cref="Config"/> 属性值初始化类型 <see cref="DbMasterSlaveConnectionInterceptor"/> 的新实例。
 		/// </summary>
-		/// <param name="config"></param>
 		internal DbMasterSlaveConnectionInterceptor(DbMasterSlaveConfigContext config)
 		{
 			if (config == null)
@@ -29,22 +28,17 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			get { return this._config; }
 		}
 
-
 		/// <summary>
 		/// 在打开数据库连接动作执行前瞬间触发。将数据库连接字符串更新至 EF 数据库主从读写分离服务中配置的相关值。
 		/// </summary>
-		/// <param name="connection"></param>
-		/// <param name="interceptionContext"></param>
 		public override void Opening(DbConnection connection, DbConnectionInterceptionContext interceptionContext)
 		{
-			this.UpdateConnectionStringIfNeed(connection, this.Config.UsableMasterConnectionString, interceptionContext.DbContexts);
+			UpdateConnectionStringIfNeed(connection, this.Config.UsableMasterConnectionString, interceptionContext.DbContexts);
 		}
 
 		/// <summary>
 		/// 在开启一个数据库事务动作执行前瞬间触发。当开始事务操作时将数据库连接字符串更新至 Master 数据库。
 		/// </summary>
-		/// <param name="connection"></param>
-		/// <param name="interceptionContext"></param>
 		public override void BeginningTransaction(DbConnection connection, BeginTransactionInterceptionContext interceptionContext)
 		{
 			UpdateConnectionStringIfNeed(connection, this.Config.UsableMasterConnectionString, interceptionContext.DbContexts);

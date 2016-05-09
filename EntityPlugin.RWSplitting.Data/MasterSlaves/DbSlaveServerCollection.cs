@@ -19,8 +19,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 将元素插入 <see cref="DbSlaveServerCollection"/> 的指定索引处。
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="item"></param>
 		protected override void InsertItem(int index, DbSlaveServer item)
 		{
 			if (item == null)
@@ -33,8 +31,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 替换指定索引处的元素。
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="item"></param>
 		protected override void SetItem(int index, DbSlaveServer item)
 		{
 			if (item == null)

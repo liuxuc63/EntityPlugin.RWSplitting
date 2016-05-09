@@ -13,15 +13,12 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 初始化类型 <see cref="ApplyItemCollection"/> 的新实例。
 		/// </summary>
-		public ApplyItemCollection()
-		{
-		}
+		public ApplyItemCollection() { }
 
 		/// <summary>
 		/// 获取或设置位于集合中指定索引处的 <see cref="ApplyItemElement"/> 对象。
 		/// </summary>
 		/// <param name="index">集合中 <see cref="ApplyItemElement"/> 对象的索引。</param>
-		/// <returns></returns>
 		public ApplyItemElement this[int index]
 		{
 			get { return (ApplyItemElement)BaseGet(index); }
@@ -39,8 +36,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// 根据 EF 数据库上下文类型获取其所对应的 <see cref="ApplyItemElement"/> 对象。
 		/// <para>如果没找到 <paramref name="targetContextType"/> 对应的 <see cref="ApplyItemElement"/> 对象，该索引器属性将返回 null。</para>
 		/// </summary>
-		/// <param name="targetContextType"></param>
-		/// <returns></returns>
 		public ApplyItemElement this[Type targetContextType]
 		{
 			get
@@ -65,8 +60,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// 根据 EF 数据库上下文对象获取其所对应的 <see cref="ApplyItemElement"/> 对象。
 		/// <para>如果没找到 <paramref name="context"/> 对应的 <see cref="ApplyItemElement"/> 对象，该索引器属性将返回 null。</para>
 		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
 		public ApplyItemElement this[System.Data.Entity.DbContext context]
 		{
 			get
@@ -98,8 +91,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 根据 EF 数据库上下文类型获取其所对应的 <see cref="ApplyItemElement"/> 对象。
 		/// </summary>
-		/// <param name="targetContextType"></param>
-		/// <returns></returns>
 		public ApplyItemElement GetApplyItem(Type targetContextType)
 		{
 			return this[targetContextType];
@@ -108,8 +99,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 根据 EF 数据库上下文对象获取其所对应的 <see cref="ApplyItemElement"/> 对象。
 		/// </summary>
-		/// <param name="context"></param>
-		/// <returns></returns>
 		public ApplyItemElement GetApplyItem(System.Data.Entity.DbContext context)
 		{
 			return this[context];
@@ -118,7 +107,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 向 ApplyItemCollection 添加配置元素。
 		/// </summary>
-		/// <param name="element"></param>
 		protected override void BaseAdd(System.Configuration.ConfigurationElement element)
 		{
 			if (!this.ValidateApplyItemSection(element))
@@ -130,8 +118,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 向配置元素集合添加配置元素。
 		/// </summary>
-		/// <param name="index"></param>
-		/// <param name="element"></param>
 		protected override void BaseAdd(int index, ConfigurationElement element)
 		{
 			if (!this.ValidateApplyItemSection(element))
@@ -154,7 +140,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 创建一个新的 <see cref="ApplyItemElement"/>。
 		/// </summary>
-		/// <returns></returns>
 		protected override ConfigurationElement CreateNewElement()
 		{
 			return new ApplyItemElement();
@@ -163,8 +148,6 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 		/// <summary>
 		/// 获取指定配置元素的元素键。
 		/// </summary>
-		/// <param name="element"></param>
-		/// <returns></returns>
 		protected override object GetElementKey(ConfigurationElement element)
 		{
 			return ((ApplyItemElement)element).TargetContextFullName;
