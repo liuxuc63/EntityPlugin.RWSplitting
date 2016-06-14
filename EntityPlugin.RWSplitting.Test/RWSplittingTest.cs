@@ -19,6 +19,16 @@ namespace EntityPlugin.RWSplitting.Test
 		}
 
 		[TestMethod]
+		public void Test_Switch_Slave_And_Master()
+		{
+			DbContext.SwitchToSlave();
+			Assert.IsTrue(DbContext.Database.Connection.ConnectionString.Contains("3307"));
+
+			DbContext.SwitchToMaster();
+			Assert.IsTrue(DbContext.Database.Connection.ConnectionString.Contains("3306"));
+		}
+
+		[TestMethod]
 		public void Test_Insert_Update_Query_Delete_Success()
 		{
 			User userA = new User
