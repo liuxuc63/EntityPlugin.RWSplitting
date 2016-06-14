@@ -6,8 +6,10 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 	/// <summary>
 	/// 提供对 EntityFramework 的数据库操作读写分离服务的注册配置功能。
 	/// </summary>
-	public class EFMasterSlaveConfig
+	public static class EFMasterSlaveConfig
 	{
+		private static DbMasterSlaveCommandInterceptor CommandInterceptor;
+
 		/// <summary>
 		/// 将指定的 EF 实体数据库上下文类型注册到读写分离服务中。这是 EF 读写分离服务启动的入口点。
 		/// <para>注意：传入的参数 <paramref name="contextType"/> 所表示的类型必须是 <see cref="System.Data.Entity.DbContext"/> 或者该类型的子类型。</para>
@@ -17,7 +19,7 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			if (contextType == null)
 				throw new ArgumentNullException(nameof(contextType));
 
-			DbMasterSlaveCommandInterceptor commandInterceptor = new DbMasterSlaveCommandInterceptor(contextType);
+			DbMasterSlaveCommandInterceptor commandInterceptor = CommandInterceptor = new DbMasterSlaveCommandInterceptor(contextType);
 			DbMasterSlaveConnectionInterceptor connectionInterceptor = new DbMasterSlaveConnectionInterceptor(commandInterceptor.Config);
 
 			DbInterception.Remove(commandInterceptor);
@@ -25,6 +27,16 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 
 			DbInterception.Add(commandInterceptor);
 			DbInterception.Add(connectionInterceptor);
+		}
+
+		public static void SwitchToMaster(this System.Data.Entity.DbContext context)
+		{
+			CommandInterceptor?.SwitchToMaster(context);
+		}
+
+		public static void SwitchToSlave(this System.Data.Entity.DbContext context)
+		{
+			CommandInterceptor?.SwitchToSlave(context);
 		}
 	}
 }

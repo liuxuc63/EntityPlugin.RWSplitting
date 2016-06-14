@@ -123,6 +123,37 @@ namespace EntityPlugin.RWSplitting.MasterSlaves
 			}
 		}
 
+		/// <summary>
+		/// 手动切换到读数据库
+		/// </summary>
+		public void SwitchToSlave(System.Data.Entity.DbContext context)
+		{
+			Transaction tran = Transaction.Current;
+			string connectionString = (tran == null || tran.TransactionInformation.Status == TransactionStatus.Committed) && context.Database.CurrentTransaction == null
+				? this.SlaveConnectionString
+				: this.MasterConnectionString;
+
+			if(!ConnectionStringEquals(context.Database.Connection,connectionString))
+			{
+				UpdateConnectionString(context.Database.Connection, connectionString);
+			}
+			this.StartServersStateScanIfNeed(context);
+		}
+
+		/// <summary>
+		/// 手动切换到写数据库
+		/// </summary>
+		public void SwitchToMaster(System.Data.Entity.DbContext context)
+		{
+			string connectionString = this.MasterConnectionString;
+
+			if (!ConnectionStringEquals(context.Database.Connection, connectionString))
+			{
+				UpdateConnectionString(context.Database.Connection, connectionString);
+			}
+			this.StartServersStateScanIfNeed(context);
+		}
+
 		private string GetSlaveConnectionString(System.Data.Entity.DbContext context, DbCommand command)
 		{
 			Transaction tran = Transaction.Current;
