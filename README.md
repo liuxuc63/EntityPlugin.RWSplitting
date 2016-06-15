@@ -34,3 +34,9 @@ EFMasterSlaveConfig.Register(typeof(TestDbContext));
 	</ef.masterslave>
 </configuration>
 ```
+## 对于使用EF与Dapper的可以通过DbContext对象手动切换
+```
+DbContext.SwitchToSlave(); //切换到读数据库
+			
+DbContext.SwitchToMaster(); //切换到写数据库
+```
